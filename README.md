@@ -5,7 +5,7 @@ The implementation is based on the [Sanic](https://sanic.dev/en/) framework.
 The open api contract for the services is defined in
 the [Specmatic Central Contract Repository](https://github.com/znsio/specmatic-order-contracts/blob/main/in/specmatic/examples/store/api_order_v1.yaml)
 
-The order bff service internally calls the order api service (on port 8080).
+The order bff service internally calls the order api service (on port 9090).
 
 The purpose of this project is to demonstrate how specmatic can be used to validate the contract of the bff service
 while stubbing out the order api service at the same time.
