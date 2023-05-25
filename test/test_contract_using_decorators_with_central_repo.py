@@ -12,7 +12,7 @@ expectation_json_file = ROOT_DIR + '/test/data/expectation.json'
 
 
 @specmatic_contract_test(host, port, ROOT_DIR)
-@start_asgi_app('sanic app:app', host, port)
+@start_asgi_app('app:app', host, port)
 @specmatic_stub(stub_host, stub_port, ROOT_DIR, [expectation_json_file])
 class TestApiContract:
     pass

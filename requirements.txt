@@ -19,7 +19,7 @@ python-dotenv==1.0.0
 requests==2.30.0
 sanic==23.3.0
 sanic-routing==22.8.0
-specmatic==0.6.0
+specmatic==0.7.0
 tracerite==1.1.0
 ujson==5.7.0
 uvicorn==0.22.0
