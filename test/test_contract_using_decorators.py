@@ -1,7 +1,6 @@
 import pytest
 
 from specmatic.core.decorators import specmatic_contract_test, specmatic_stub, start_asgi_app
-from api import app
 from definitions import ROOT_DIR
 
 app_host = "127.0.0.1"

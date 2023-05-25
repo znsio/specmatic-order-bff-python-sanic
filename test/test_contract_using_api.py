@@ -1,5 +1,4 @@
 import pytest
-from api import app
 from definitions import ROOT_DIR
 from specmatic.core.specmatic import Specmatic
 

@@ -1,6 +1,5 @@
 import pytest
 from specmatic.core.specmatic import Specmatic
-from api import app
 from definitions import ROOT_DIR
 
 app_host = "127.0.0.1"
