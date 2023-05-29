@@ -12,9 +12,9 @@ service_contract_file = ROOT_DIR + '/test/spec/product-search-bff-api.yaml'
 stub_contract_file = ROOT_DIR + '/test/spec/api_order_v1.yaml'
 
 
-@specmatic_contract_test(app_host, app_port, ROOT_DIR, service_contract_file)
+@specmatic_contract_test(app_host, app_port, ROOT_DIR, [service_contract_file])
 @start_asgi_app('app:app', app_host, app_port)
-@specmatic_stub(stub_host, stub_port, ROOT_DIR, [expectation_json_file], stub_contract_file)
+@specmatic_stub(stub_host, stub_port, ROOT_DIR, [expectation_json_file], [stub_contract_file])
 class TestContractWithLocalSpecs:
     pass
 
