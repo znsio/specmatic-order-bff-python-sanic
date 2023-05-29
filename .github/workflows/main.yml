@@ -20,7 +20,7 @@ jobs:
     - name: Setup python
       uses: actions/setup-python@v4
       with:
-          python-version: '3.11'
+          python-version: '3.8.15'
           cache: 'pip'
     - name: Run pip install
       working-directory: main

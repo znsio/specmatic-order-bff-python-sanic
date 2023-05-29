@@ -31,7 +31,7 @@ while stubbing out the order api service at the same time.
 
       This will create a virtual environment using the default python installation.  
       If you wish to provide a specific python installation, run:  
-      ```virtualenv venv --python="/opt/homebrew/Cellar/python@3.11/3.11.3/libexec/bin/python"```
+      ```virtualenv venv --python="/opt/homebrew/opt/python@3.8/libexec/bin/python"```
 
     - To activate your virtual environment, execute this from a terminal window in your root folder:  
       ```source venv/bin/activate```
