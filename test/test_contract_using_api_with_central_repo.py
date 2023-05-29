@@ -15,7 +15,7 @@ class TestContract:
 
 Specmatic.test_asgi_app('app:app',
                         TestContract,
-                        ROOT_DIR,
+                        project_root=ROOT_DIR,
                         app_host=app_host,
                         app_port=app_port,
                         stub_host=stub_host,
