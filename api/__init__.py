@@ -1,11 +1,14 @@
-import os
+import configparser
 
 from sanic import Sanic
-from dotenv import load_dotenv
+from definitions import ROOT_DIR
 
-load_dotenv()
+config = configparser.ConfigParser()
+config.read(ROOT_DIR + '/cfg.ini')
+
 app = Sanic("OrderBFF")
-app.config["ORDER_API_HOST"] = os.getenv("ORDER_API_HOST")
-app.config["ORDER_API_PORT"] = os.getenv("ORDER_API_PORT")
+app.config["ORDER_API_HOST"] = config.get('dev', 'ORDER_API_HOST')
+app.config["ORDER_API_PORT"] = config.get('dev', 'ORDER_API_PORT')
+
 
 from api.routes import *
