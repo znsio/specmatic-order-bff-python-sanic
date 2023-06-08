@@ -15,7 +15,7 @@ class TestContract:
     pass
 
 
-def update_app_config_with_stub_info(host: str, port: int):
+def set_app_config(host: str, port: int):
     config = configparser.ConfigParser()
     config.read(ROOT_DIR + '/cfg.ini')
     config['dev']['ORDER_API_HOST'] = host
@@ -33,12 +33,12 @@ def reset_app_config():
         config.write(configfile)
 
 
-app_server = ASGIAppServer('app:app', set_app_config_func=update_app_config_with_stub_info,
-                           reset_app_config_func=reset_app_config)
 Specmatic() \
     .with_project_root(ROOT_DIR) \
-    .stub(expectations=[expectation_json_file]) \
-    .app(app_server) \
+    .with_stub(expectations=[expectation_json_file]) \
+    .with_app_module('app:app') \
+    .with_set_app_config_func(set_app_config) \
+    .with_reset_app_config_func(reset_app_config) \
     .test(TestContract) \
     .run()
 
