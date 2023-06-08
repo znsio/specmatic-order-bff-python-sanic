@@ -2,14 +2,13 @@ import pytest
 import configparser
 from definitions import ROOT_DIR
 from specmatic.core.specmatic import Specmatic
+from specmatic.servers.asgi_app_server import ASGIAppServer
 
 app_host = "127.0.0.1"
 app_port = 8000
 stub_host = "127.0.0.1"
 stub_port = 9090
 expectation_json_file = ROOT_DIR + '/test/data/expectation.json'
-app_contract_file = ROOT_DIR + '/test/spec/product-search-bff-api.yaml'
-stub_contract_file = ROOT_DIR + '/test/spec/api_order_v1.yaml'
 
 
 class TestContract:
@@ -34,13 +33,14 @@ def reset_app_config():
         config.write(configfile)
 
 
-Specmatic.test_asgi_app('app:app',
-                        TestContract,
-                        project_root=ROOT_DIR,
-                        expectation_files=[expectation_json_file],
-                        app_config_update_func=update_app_config_with_stub_info)
-
-reset_app_config()
+app_server = ASGIAppServer('app:app', set_app_config_func=update_app_config_with_stub_info,
+                           reset_app_config_func=reset_app_config)
+Specmatic() \
+    .with_project_root(ROOT_DIR) \
+    .stub(expectations=[expectation_json_file]) \
+    .app(app_server) \
+    .test(TestContract) \
+    .run()
 
 if __name__ == '__main__':
     pytest.main()
