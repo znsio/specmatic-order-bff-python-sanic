@@ -17,9 +17,7 @@ class TestContract:
 Specmatic() \
     .with_project_root(ROOT_DIR) \
     .with_stub(stub_host, stub_port, [expectation_json_file]) \
-    .with_app_module('app:app') \
-    .with_app_host(app_host) \
-    .with_app_port(app_port) \
+    .with_asgi_app('app:app', app_host, app_port) \
     .test(TestContract) \
     .run()
 

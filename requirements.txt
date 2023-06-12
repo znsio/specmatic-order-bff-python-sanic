@@ -21,4 +21,4 @@ sanic-routing==22.8.0
 tracerite==1.1.0
 ujson==5.7.0
 uvicorn==0.18.3
-specmatic==0.9.0
+specmatic==0.9.1
