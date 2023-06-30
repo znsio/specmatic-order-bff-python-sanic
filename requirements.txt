@@ -14,7 +14,7 @@ multidict==6.0.4
 packaging==23.1
 pluggy==1.0.0
 psutil==5.9.5
-pytest==7.3.1
+pytest==7.4.0
 requests==2.30.0
 sanic==23.3.0
 sanic-routing==22.8.0
