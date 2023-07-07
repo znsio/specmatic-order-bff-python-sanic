@@ -22,3 +22,4 @@ tracerite==1.1.0
 ujson==5.7.0
 uvicorn==0.18.3
 specmatic==0.11.0
+coverage==7.2.7
