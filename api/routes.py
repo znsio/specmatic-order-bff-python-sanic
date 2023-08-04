@@ -16,5 +16,13 @@ async def get_products(request):
 
     product_list = jsonp.loads(response.content)
 
-    products = [{"id": product["id"], "name": product["name"], "type": product["type"], "inventory": product["inventory"]} for product in product_list]
+    products = [
+        {"id": product["id"], "name": product["name"], "type": product["type"], "inventory": product["inventory"]} for
+        product in product_list]
     return json(products)
+
+
+@app.route("/orders", methods=["POST"])
+async def save_order(request):
+    # Not yet implemented, but will show up in coverage report
+    pass
