@@ -14,9 +14,9 @@ while stubbing out the order api service at the same time.
 
 - Install Python 3.11 ( use homebrew if you are on mac os)
 
+- Install JRE 17
 
 - Install pip
-
 
 - Install virtualenv by running:  
   ```pip install virtualenv```
