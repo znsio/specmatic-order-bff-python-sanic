@@ -1,9 +1,9 @@
 .DS_Store
 *.idea
-.specmatic/*
 junit_report
 .pytest_cache
 specmatic.jar
 specmatic_python.egg-info/*
 dist/*
 venv
+.specmatic
