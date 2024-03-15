@@ -1,7 +1,7 @@
 pytest==7.3.1
 python-dotenv==1.0.0
 requests==2.30.0
-sanic==23.3.0
+sanic==23.12.1
 sanic-routing==22.8.0
 specmatic==0.24.0
 coverage==7.2.7
