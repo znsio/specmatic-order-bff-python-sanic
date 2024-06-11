@@ -6,4 +6,8 @@ specmatic.jar
 specmatic_python.egg-info/*
 dist/*
 venv
+.venv
 .specmatic
+__pycache__
+.vscode
+build

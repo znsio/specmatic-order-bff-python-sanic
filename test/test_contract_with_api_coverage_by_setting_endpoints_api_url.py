@@ -1,19 +1,12 @@
 import pytest
 from specmatic.core.specmatic import Specmatic
-from specmatic.servers.asgi_app_server import ASGIAppServer
 from specmatic.coverage.servers.sanic_app_coverage_server import SanicAppCoverageServer
+from specmatic.servers.asgi_app_server import ASGIAppServer
 
-from definitions import ROOT_DIR
-from api import app
+from test import APP, APP_HOST, APP_PORT, APP_STR, ROOT_DIR, STUB_HOST, STUB_PORT, expectation_json_files
 
-app_host = "127.0.0.1"
-app_port = 8000
-stub_host = "127.0.0.1"
-stub_port = 9090
-expectation_json_file = ROOT_DIR + '/test/data/expectation.json'
-
-app_server = ASGIAppServer('app:app', app_host, app_port)
-coverage_server = SanicAppCoverageServer(app)
+app_server = ASGIAppServer(APP_STR, APP_HOST, APP_PORT)
+coverage_server = SanicAppCoverageServer(APP)
 
 app_server.start()
 coverage_server.start()
@@ -23,15 +16,12 @@ class TestContract:
     pass
 
 
-Specmatic() \
-    .with_project_root(ROOT_DIR) \
-    .with_stub(stub_host, stub_port, [expectation_json_file]) \
-    .with_endpoints_api(coverage_server.endpoints_api) \
-    .test(TestContract, app_host, app_port) \
-    .run()
+Specmatic().with_project_root(ROOT_DIR).with_stub(STUB_HOST, STUB_PORT, expectation_json_files).with_endpoints_api(
+    coverage_server.endpoints_api,
+).test(TestContract, APP_HOST, APP_PORT).run()
 
 app_server.stop()
 coverage_server.stop()
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     pytest.main()

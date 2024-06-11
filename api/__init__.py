@@ -1,14 +1,50 @@
-import configparser
+import os
+from datetime import UTC, datetime
 
-from sanic import Sanic
-from definitions import ROOT_DIR
+from dotenv import load_dotenv
+from marshmallow import ValidationError
+from sanic import Sanic, json
+from sanic.exceptions import HTTPException
 
-config = configparser.ConfigParser()
-config.read(ROOT_DIR + '/cfg.ini')
-
+load_dotenv()
 app = Sanic("OrderBFF")
-app.config["ORDER_API_HOST"] = config.get('dev', 'ORDER_API_HOST')
-app.config["ORDER_API_PORT"] = config.get('dev', 'ORDER_API_PORT')
+app.config["ORDER_API_HOST"] = os.getenv("ORDER_API_HOST")
+app.config["ORDER_API_PORT"] = os.getenv("ORDER_API_PORT")
+app.config["API_URL"] = f"http://{app.config['ORDER_API_HOST']}:{app.config['ORDER_API_PORT']}"
+app.config["AUTH_TOKEN"] = os.getenv("AUTH_TOKEN") or "API-TOKEN-SPEC"
+app.config["REQ_TIMEOUT"] = os.getenv("REQ_TIMEOUT") or 3000
 
 
-from api.routes import *
+@app.exception(ValidationError)
+async def handle_marshmallow_validation_error(_, exc: "ValidationError"):
+    # NOTE:API SPEC V4 specifies that message should be a string not an object / array
+    errors = "\n".join([f"{field}: {", ".join(err)}" for field, err in exc.normalized_messages().items()])
+    return json(
+        {
+            "timestamp": datetime.now(tz=UTC).isoformat(),
+            "status": 400,
+            "error": "Bad Request",
+            "message": errors,
+        },
+        status=400,
+    )
+
+
+@app.exception(HTTPException)
+async def http_error_handler(_, exception: "HTTPException"):
+    return json(
+        {
+            "timestamp": datetime.now(tz=UTC).isoformat(),
+            "status": exception.status_code,
+            "error": exception.__class__.__name__,
+            "message": str(exception),
+        },
+        status=exception.status_code,
+    )
+
+
+from api.orders.routes import orders  # noqa: E402
+from api.products.routes import products  # noqa: E402
+
+app.blueprint(products)
+app.blueprint(orders)

@@ -1,25 +1,18 @@
 import pytest
 from specmatic.core.specmatic import Specmatic
 
-from definitions import ROOT_DIR
-
-app_host = "127.0.0.1"
-app_port = 8000
-stub_host = "127.0.0.1"
-stub_port = 9090
-expectation_json_file = ROOT_DIR + '/test/data/expectation.json'
+from test import APP_HOST, APP_PORT, APP_STR, ROOT_DIR, STUB_HOST, STUB_PORT, expectation_json_files
 
 
 class TestContract:
     pass
 
 
-Specmatic() \
-    .with_project_root(ROOT_DIR) \
-    .with_stub(stub_host, stub_port, [expectation_json_file]) \
-    .with_asgi_app('app:app', app_host, app_port) \
-    .test(TestContract) \
-    .run()
+Specmatic().with_project_root(ROOT_DIR).with_stub(STUB_HOST, STUB_PORT, expectation_json_files).with_asgi_app(
+    APP_STR,
+    APP_HOST,
+    APP_PORT,
+).test(TestContract).run()
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     pytest.main()

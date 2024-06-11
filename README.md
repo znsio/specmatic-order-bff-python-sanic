@@ -1,54 +1,77 @@
-This is a Python implementation of the [Specmatic Order BFF Service](https://github.com/znsio/specmatic-order-ui)
-project.  
-The implementation is based on the [Sanic](https://sanic.dev/en/) framework.
 
-The open api contract for the services is defined in
-the [Specmatic Central Contract Repository](https://github.com/znsio/specmatic-order-contracts/blob/main/in/specmatic/examples/store/api_order_v1.yaml)
+# Specmatic Sample: Python-Sanic BFF
 
-The order bff service internally calls the order api service (on port 9090).
+* [Specmatic Website](https://specmatic.in)
+* [Specmatic Documentation](https://specmatic.in/documentation.html)
 
-The purpose of this project is to demonstrate how specmatic can be used to validate the contract of the bff service
-while stubbing out the order api service at the same time.
+This example project illustrates the practice of contract-driven development and contract testing within a Sanic (Python) application that relies on an external domain service. In this context, Specmatic is utilized to stub calls to domain API services according to its OpenAPI specification.
 
-```Dev Setup```
+Here is the domain api [contract/open api spec](https://github.com/znsio/specmatic-order-contracts/blob/main/in/specmatic/examples/store/api_order_v3.yaml)
 
-- Install Python 3.11 ( use homebrew if you are on mac os)
+## Definitions
 
-- Install JRE 17 or later
+* BFF: Backend for Frontend
+* Domain API: API managing the domain model
+* Specmatic Stub/Mock Server: Generate a server that simulates a real service using its OpenAPI or AsyncAPI specification
 
-- Install pip
+## Background
 
-- Install virtualenv by running:  
-  ```pip install virtualenv```
+A standard web application setup may resemble the following structure. By leveraging Specmatic, we can engage in contract-driven development and perform comprehensive testing on all the components listed below. In this illustrative project, we demonstrate the process for a Sanic BFF, which relies on the Domain API Service, showcasing OpenAPI support within **Specmatic**.
 
+![HTML client talks to client API which talks to backend API](assets/specmatic-order-bff-architecture.gif)
 
-- Clone the git repository
+## Tech
 
+1. Sanic
+2. Specmatic
+3. PyTest
+4. Coverage
 
-- **Virtual Environment Setup**
-    - Create a "virtual environment" named 'venv' by running:  
-      ```virtualenv venv ```
+## Setup
 
-      This will create a virtual environment using the default python installation.  
-      If you wish to provide a specific python installation, run:  
-      ```virtualenv venv --python="/opt/homebrew/opt/python@3.8/libexec/bin/python"```
+1. Install [Python 3.12](https://www.python.org/)
+2. Install JRE 17 or later.
 
-    - To activate your virtual environment, execute this from a terminal window in your root folder:  
-      ```source venv/bin/activate```
+## Setup Virtual Environment
 
+1. ### Create a virtual environment named ".venv" by executing the following command in the terminal from the project's root directory
 
-- **Install project requirements**  
-  From a terminal window in your root folder, run:  
-  ``` pip install -r requirements.txt```
+   ```shell
+    python -m venv .venv
+    ```
 
+2. ### Activate virtual environment by executing
 
-- **Run Tests**  
-  Download the Specmatic standalone jar from the [specmatic website](https://specmatic.in/getting_started.html)  
-  Open a terminal window in the root folder and run:  
-  ```pytest test -v -s```
+* **on MacOS and Linux**
 
-  If you see any errors regarding missing pcakages, try reloading the virtual env:  
-  ```deactivate```   
-  ```source venv/bin/activate```  
-    
- 
+   ```shell
+   source .venv/bin/activate
+   ```
+
+* **on Windows CMD**
+
+  ```cmd
+  .venv\Scripts\activate.bat
+  ```
+
+* **on Windows Powershell (you may need to adjust the ExecutionPolicy)**
+
+  ```powershell
+  .\.venv\Scripts\Activate.ps1
+  ```
+
+## Install Dependencies
+
+To install all necessary dependencies for this project, navigate to the project's root directory in your terminal and execute
+
+```shell
+pip install -r requirements.txt
+```
+
+## Execute Tests and Validate Contracts with Specmatic
+
+Executing this command will initiate Specmatic and execute the tests on the Sanic application.
+
+```shell
+pytest test -v -s
+```

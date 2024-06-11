@@ -3,7 +3,7 @@
     "method": "GET",
     "path": "/products",
     "query": {
-      "type": "test"
+      "type": "gadget"
     }
   },
   "http-response": {
@@ -27,6 +27,7 @@
         "inventory": 20,
         "type": "gadget"
       }
-    ]
+    ],
+    "status-text": "OK"
   }
 }
