@@ -4,7 +4,7 @@ from datetime import UTC, datetime
 from dotenv import load_dotenv
 from marshmallow import ValidationError
 from sanic import Sanic, json
-from sanic.exceptions import HTTPException
+from sanic.exceptions import SanicException
 
 load_dotenv()
 app = Sanic("OrderBFF")
@@ -30,8 +30,8 @@ async def handle_marshmallow_validation_error(_, exc: "ValidationError"):
     )
 
 
-@app.exception(HTTPException)
-async def http_error_handler(_, exception: "HTTPException"):
+@app.exception(SanicException)
+async def http_error_handler(_, exception: "SanicException"):
     return json(
         {
             "timestamp": datetime.now(tz=UTC).isoformat(),
