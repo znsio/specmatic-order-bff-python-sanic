@@ -25,7 +25,9 @@ class ProductSchema(Schema):
     id = fields.Integer(required=False, strict=True)
     name = fields.String(required=True)
     type = fields.Enum(ProductType, required=True, by_value=True)
-    inventory = fields.Integer(required=True, strict=True)
+    inventory = fields.Integer(
+        required=True, strict=True, validate=validate.Range(min_inclusive=True, max_inclusive=True, min=1, max=101),
+    )
     description = fields.String(required=False, dump_default="")
 
 
