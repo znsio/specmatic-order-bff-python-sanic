@@ -1,3 +1,4 @@
+import json as jsonlib
 import os
 from datetime import UTC, datetime
 
@@ -17,14 +18,12 @@ app.config["REQ_TIMEOUT"] = os.getenv("REQ_TIMEOUT") or 3000
 
 @app.exception(ValidationError)
 async def handle_marshmallow_validation_error(_, exc: "ValidationError"):
-    # NOTE:API SPEC V4 specifies that message should be a string not an object / array
-    errors = "\n".join([f"{field}: {", ".join(err)}" for field, err in exc.normalized_messages().items()])
     return json(
         {
             "timestamp": datetime.now(tz=UTC).isoformat(),
             "status": 400,
             "error": "Bad Request",
-            "message": errors,
+            "message": jsonlib.dumps(exc.messages),
         },
         status=400,
     )
