@@ -1,12 +1,14 @@
 
 # Specmatic Sample: Python-Sanic BFF
 
-* [Specmatic Website](https://specmatic.in)
-* [Specmatic Documentation](https://specmatic.in/documentation.html)
+* [Specmatic Website](https://specmatic.io)
+* [Specmatic Documentation](https://specmatic.io/documentation.html)
 
 This example project illustrates the practice of contract-driven development and contract testing within a Sanic (Python) application that relies on an external domain service. In this context, Specmatic is utilized to stub calls to domain API services according to its OpenAPI specification.
 
-Here is the domain api [contract/open api spec](https://github.com/znsio/specmatic-order-contracts/blob/main/in/specmatic/examples/store/api_order_v3.yaml)
+Here is the Domain [OpenAPI spec](https://github.com/znsio/specmatic-order-contracts/blob/main/io/specmatic/examples/store/openapi/api_order_v3.yaml)
+
+Here is the BFF [OpenAPI spec](https://github.com/znsio/specmatic-order-contracts/blob/main/io/specmatic/examples/store/openapi/product_search_bff_v4.yaml)
 
 ## Definitions
 
