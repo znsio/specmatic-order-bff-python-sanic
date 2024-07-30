@@ -1,8 +1,8 @@
 coverage==7.6.0
 marshmallow==3.21.3
-pytest==8.3.1
+pytest==8.3.2
 python-dotenv==1.0.1
 requests==2.32.3
 sanic==24.6.0
-setuptools==71.1.0
-specmatic==2.0.1
+setuptools==72.1.0
+specmatic==2.0.3
